@@ -15,7 +15,7 @@ public class BankAccount {
     public BankAccount(String myAccount, double Deposit) {
         this.myAccount = myAccount;
         if (Deposit < 0) {
-            throw new Error("Deposit must be greater than 0.");
+            throw new IllegalArgumentException("Deposit must be greater than 0.");
         }
         this.balance = Deposit;
         this.transactionHistory = new ArrayList<>();
@@ -24,7 +24,7 @@ public class BankAccount {
     // Method to deposit
     public void deposit(double money) {
         if (money <= 0) {
-            throw new Error("You cannot deposit anything $0 or less.");
+            throw new IllegalArgumentException("You cannot deposit anything $0 or less.");
         }
         balance += money;
         transactionHistory.add("Deposit Successful: " + money);
@@ -33,10 +33,10 @@ public class BankAccount {
     // Method to withdraw
     public void withdraw(double money) {
         if (money <= 0) {
-            throw new Error("Withdraw means take money out, can't be $0.");
+            throw new IllegalArgumentException("Withdraw means take money out, can't be $0.");
         }
         if (money > balance) {
-            throw new Error("Insufficient Funds.");
+            throw new IllegalArgumentException("Insufficient Funds.");
         }
         balance -= money;
         transactionHistory.add("Withdraw Successful: " + money);
